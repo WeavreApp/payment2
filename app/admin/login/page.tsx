@@ -95,7 +95,10 @@ export default function AdminLoginPage() {
 
           <div className="mt-6 pt-6 border-t border-gray-200">
             <p className="text-xs text-gray-600 text-center">
-              For demo purposes, contact your administrator for credentials.
+              Don't have an admin account?{" "}
+              <a href="/admin/setup" className="text-blue-600 hover:underline font-medium">
+                Create one here
+              </a>
             </p>
           </div>
         </div>

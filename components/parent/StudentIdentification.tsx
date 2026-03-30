@@ -79,21 +79,33 @@ export default function StudentIdentification({
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Student's Class
           </label>
-          <select
-            value={formData.studentClass}
-            onChange={(e) =>
-              setFormData({ ...formData, studentClass: e.target.value })
-            }
-            required
-            className="w-full h-11 px-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">Select class</option>
-            {classes.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
+          {classes.length > 0 ? (
+            <select
+              value={formData.studentClass}
+              onChange={(e) =>
+                setFormData({ ...formData, studentClass: e.target.value })
+              }
+              required
+              className="w-full h-11 px-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Select class</option>
+              {classes.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <Input
+              value={formData.studentClass}
+              onChange={(e) =>
+                setFormData({ ...formData, studentClass: e.target.value })
+              }
+              placeholder="Enter class (e.g., JSS 1, SSS 3)"
+              required
+              className="h-11 border-gray-200"
+            />
+          )}
         </div>
 
         <div>

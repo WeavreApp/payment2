@@ -30,11 +30,11 @@ export default function PendingReviewPage() {
 
     if (res.data) {
       const enriched = await Promise.all(
-        res.data.map(async (payment) => {
+        (res.data as any).map(async (payment: any) => {
           const studentRes = await getStudentById(payment.student_id);
           return {
             ...payment,
-            studentName: studentRes.data?.full_name,
+            studentName: (studentRes.data as any)?.full_name,
           };
         })
       );
