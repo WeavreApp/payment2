@@ -4,11 +4,16 @@ import { createClient } from "@/lib/supabase/middleware";
 export async function middleware(request: NextRequest) {
   const { supabase, response } = await createClient(request);
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const publicPaths = ["/admin/login", "/admin/setup"];
+  const isPublicPath = publicPaths.some((path) =>
+    request.nextUrl.pathname.startsWith(path)
+  );
 
-  if (request.nextUrl.pathname.startsWith("/admin")) {
+  if (request.nextUrl.pathname.startsWith("/admin") && !isPublicPath) {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
     if (!session) {
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }

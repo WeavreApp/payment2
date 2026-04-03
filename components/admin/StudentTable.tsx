@@ -44,49 +44,50 @@ export default function StudentTable({
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <div className="flex-1">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+        <div className="flex-1 w-full sm:w-auto">
           <Input
             placeholder="Search by student name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="max-w-xs h-10 border-gray-200"
+            className="max-w-full sm:max-w-xs h-10 border-gray-200"
           />
         </div>
         <Button
           onClick={handleExport}
           variant="outline"
-          className="gap-2 border-gray-200"
+          className="gap-2 border-gray-200 w-full sm:w-auto"
         >
           <Download size={18} />
-          Export to Excel
+          <span className="hidden sm:inline">Export to Excel</span>
+          <span className="sm:hidden">Export</span>
         </Button>
       </div>
 
       <div className="rounded-lg border border-gray-200 overflow-hidden bg-white">
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full min-w-[640px]">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
+                <th className="px-3 sm:px-6 py-3 text-left text-xs sm:text-sm font-semibold text-gray-900">
                   Full Name
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
+                <th className="px-3 sm:px-6 py-3 text-left text-xs sm:text-sm font-semibold text-gray-900">
                   Class
                 </th>
-                <th className="px-6 py-3 text-right text-sm font-semibold text-gray-900">
+                <th className="px-3 sm:px-6 py-3 text-right text-xs sm:text-sm font-semibold text-gray-900">
                   Total Fees
                 </th>
-                <th className="px-6 py-3 text-right text-sm font-semibold text-gray-900">
+                <th className="px-3 sm:px-6 py-3 text-right text-xs sm:text-sm font-semibold text-gray-900">
                   Total Paid
                 </th>
-                <th className="px-6 py-3 text-right text-sm font-semibold text-gray-900">
+                <th className="px-3 sm:px-6 py-3 text-right text-xs sm:text-sm font-semibold text-gray-900">
                   Balance
                 </th>
-                <th className="px-6 py-3 text-center text-sm font-semibold text-gray-900">
+                <th className="px-3 sm:px-6 py-3 text-center text-xs sm:text-sm font-semibold text-gray-900">
                   Status
                 </th>
-                <th className="px-6 py-3 text-center text-sm font-semibold text-gray-900">
+                <th className="px-3 sm:px-6 py-3 text-center text-xs sm:text-sm font-semibold text-gray-900">
                   Actions
                 </th>
               </tr>
@@ -94,7 +95,7 @@ export default function StudentTable({
             <tbody>
               {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-6 py-8 text-center text-gray-600">
+                  <td colSpan={7} className="px-3 sm:px-6 py-8 text-center text-sm text-gray-600">
                     No students found
                   </td>
                 </tr>
@@ -104,43 +105,43 @@ export default function StudentTable({
                     key={student.id}
                     className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
                   >
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium text-gray-900">
                       {student.full_name}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-700">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-700">
                       {student.class}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-900 text-right font-medium">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-900 text-right font-medium">
                       ₦{student.total_fees.toLocaleString()}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-900 text-right font-medium">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-900 text-right font-medium">
                       ₦{student.totalPaid.toLocaleString()}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-900 text-right font-medium">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-900 text-right font-medium">
                       ₦{student.balance.toLocaleString()}
                     </td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-center">
                       <StatusBadge
                         status={getPaymentStatus(student.totalPaid, student.total_fees)}
                       />
                     </td>
-                    <td className="px-6 py-4 text-center">
-                      <div className="flex items-center justify-center gap-2">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-center">
+                      <div className="flex items-center justify-center gap-1 sm:gap-2">
                         <Button
                           size="sm"
                           variant="ghost"
                           onClick={() => onEdit(student)}
-                          className="text-blue-600 hover:bg-blue-50"
+                          className="text-blue-600 hover:bg-blue-50 p-1 sm:p-2"
                         >
-                          <Edit2 size={16} />
+                          <Edit2 size={14} className="sm:w-4 sm:h-4" />
                         </Button>
                         <Button
                           size="sm"
                           variant="ghost"
                           onClick={() => onDelete(student.id)}
-                          className="text-red-600 hover:bg-red-50"
+                          className="text-red-600 hover:bg-red-50 p-1 sm:p-2"
                         >
-                          <Trash2 size={16} />
+                          <Trash2 size={14} className="sm:w-4 sm:h-4" />
                         </Button>
                       </div>
                     </td>

@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { signOut } from "@/app/actions/auth";
-import { LayoutDashboard, Users, CreditCard, CircleCheck as CheckCircle2, LogOut, GraduationCap } from "lucide-react";
+import { LayoutDashboard, Users, CreditCard, CircleCheck as CheckCircle2, LogOut, GraduationCap, Menu, X } from "lucide-react";
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
     {
@@ -32,58 +34,80 @@ export default function Sidebar() {
     },
   ];
 
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
   return (
-    <div className="w-64 bg-white border-r border-gray-200 h-screen sticky top-0 flex flex-col">
-      <div className="p-6 border-b border-gray-200">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
-            <GraduationCap className="text-white" size={24} />
-          </div>
-          <div>
-            <h2 className="font-semibold text-gray-900">School Admin</h2>
-            <p className="text-xs text-gray-600">Payment System</p>
+    <>
+      <button
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-md border border-gray-200"
+      >
+        {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+
+      {mobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
+          onClick={closeMobileMenu}
+        />
+      )}
+
+      <div
+        className={`fixed lg:static inset-y-0 left-0 z-40 w-64 bg-white border-r border-gray-200 flex flex-col transition-transform duration-300 ease-in-out ${
+          mobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        }`}
+      >
+        <div className="p-6 border-b border-gray-200">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+              <GraduationCap className="text-white" size={24} />
+            </div>
+            <div>
+              <h2 className="font-semibold text-gray-900">School Admin</h2>
+              <p className="text-xs text-gray-600">Payment System</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <nav className="flex-1 p-4 space-y-2">
-        {navItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = pathname.startsWith(item.href);
+        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = pathname.startsWith(item.href);
 
-          return (
-            <Link key={item.href} href={item.href}>
-              <button
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                  isActive
-                    ? "bg-blue-50 text-blue-600 font-medium"
-                    : "text-gray-700 hover:bg-gray-50"
-                }`}
-              >
-                <Icon size={20} />
-                <span className="text-sm">{item.label}</span>
-              </button>
-            </Link>
-          );
-        })}
-      </nav>
+            return (
+              <Link key={item.href} href={item.href} onClick={closeMobileMenu}>
+                <button
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                    isActive
+                      ? "bg-blue-50 text-blue-600 font-medium"
+                      : "text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  <Icon size={20} />
+                  <span className="text-sm">{item.label}</span>
+                </button>
+              </Link>
+            );
+          })}
+        </nav>
 
-      <div className="p-4 border-t border-gray-200">
-        <form
-          action={async () => {
-            await signOut();
-          }}
-        >
-          <Button
-            type="submit"
-            variant="outline"
-            className="w-full justify-start gap-3 text-red-600 border-red-200 hover:bg-red-50"
+        <div className="p-4 border-t border-gray-200">
+          <form
+            action={async () => {
+              await signOut();
+            }}
           >
-            <LogOut size={20} />
-            Logout
-          </Button>
-        </form>
+            <Button
+              type="submit"
+              variant="outline"
+              className="w-full justify-start gap-3 text-red-600 border-red-200 hover:bg-red-50"
+            >
+              <LogOut size={20} />
+              Logout
+            </Button>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

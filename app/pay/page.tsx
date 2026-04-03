@@ -49,17 +49,17 @@ export default function PaymentPortalPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      <div className="max-w-2xl mx-auto px-4 py-8">
-        <div className="mb-8 text-center">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <div className="mb-6 sm:mb-8 text-center">
           <div className="flex justify-center mb-4">
-            <div className="w-14 h-14 bg-blue-500 rounded-lg flex items-center justify-center">
-              <GraduationCap className="text-white" size={32} />
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-500 rounded-lg flex items-center justify-center">
+              <GraduationCap className="text-white" size={28} />
             </div>
           </div>
-          <h1 className="text-3xl font-semibold text-gray-900">
+          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 px-4">
             School Payment Portal
           </h1>
-          <p className="text-gray-600 mt-2">
+          <p className="text-sm sm:text-base text-gray-600 mt-2">
             Secure payment system for school fees
           </p>
         </div>
@@ -93,33 +93,33 @@ export default function PaymentPortalPage() {
         )}
 
         {currentStep === 4 && (
-          <Card className="border-0 shadow-sm p-8">
+          <Card className="border-0 shadow-sm p-4 sm:p-8">
             <div className="text-center">
               <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-                  <Check className="text-green-600" size={32} />
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center">
+                  <Check className="text-green-600" size={28} />
                 </div>
               </div>
 
-              <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+              <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">
                 Payment Submitted Successfully!
               </h2>
-              <p className="text-gray-600 mb-8">
+              <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8">
                 Your payment has been submitted for verification. Please save
                 your transaction ID for your records.
               </p>
 
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-                <p className="text-sm text-gray-700 mb-2">Transaction ID</p>
-                <div className="flex items-center justify-between bg-white p-3 rounded border border-gray-200">
-                  <p className="font-mono font-bold text-lg text-gray-900">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
+                <p className="text-xs sm:text-sm text-gray-700 mb-2">Transaction ID</p>
+                <div className="flex items-center justify-between bg-white p-3 rounded border border-gray-200 gap-2">
+                  <p className="font-mono font-bold text-sm sm:text-lg text-gray-900 break-all">
                     {transactionId}
                   </p>
                   <Button
                     size="sm"
                     variant="ghost"
                     onClick={handleCopyId}
-                    className="text-blue-600 hover:bg-blue-50"
+                    className="text-blue-600 hover:bg-blue-50 flex-shrink-0"
                   >
                     <Copy size={18} />
                   </Button>

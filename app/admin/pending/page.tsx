@@ -45,10 +45,10 @@ export default function PendingReviewPage() {
   };
 
   return (
-    <div className="p-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-semibold text-gray-900">Pending Review</h1>
-        <p className="text-gray-600 mt-2">
+    <div className="p-4 sm:p-6 lg:p-8">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">Pending Review</h1>
+        <p className="text-sm sm:text-base text-gray-600 mt-2">
           Review and verify parent-submitted payments
         </p>
       </div>

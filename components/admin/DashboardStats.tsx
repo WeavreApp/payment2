@@ -46,21 +46,21 @@ export default function DashboardStats({
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
       {stats.map((stat, index) => {
         const Icon = stat.icon;
         return (
           <Card key={index} className="border-0 shadow-sm">
-            <div className="p-6">
+            <div className="p-4 sm:p-6">
               <div className="flex items-start justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">{stat.label}</p>
-                  <p className="text-2xl font-semibold text-gray-900 mt-2">
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs sm:text-sm text-gray-600">{stat.label}</p>
+                  <p className="text-xl sm:text-2xl font-semibold text-gray-900 mt-2 truncate">
                     {stat.value}
                   </p>
                 </div>
-                <div className={`${stat.color} p-3 rounded-lg`}>
-                  <Icon className={`${stat.textColor} w-6 h-6`} />
+                <div className={`${stat.color} p-2 sm:p-3 rounded-lg flex-shrink-0 ml-2`}>
+                  <Icon className={`${stat.textColor} w-5 h-5 sm:w-6 sm:h-6`} />
                 </div>
               </div>
             </div>

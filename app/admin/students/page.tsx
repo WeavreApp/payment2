@@ -126,18 +126,18 @@ export default function StudentsPage() {
   };
 
   return (
-    <div className="p-8">
-      <div className="mb-8">
-        <div className="flex justify-between items-start">
+    <div className="p-4 sm:p-6 lg:p-8">
+      <div className="mb-6 sm:mb-8">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
           <div>
-            <h1 className="text-3xl font-semibold text-gray-900">Students</h1>
-            <p className="text-gray-600 mt-2">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">Students</h1>
+            <p className="text-sm sm:text-base text-gray-600 mt-2">
               Manage student records and fee information
             </p>
           </div>
           <Button
             onClick={() => handleOpenDialog()}
-            className="gap-2 bg-blue-500 hover:bg-blue-600 text-white"
+            className="gap-2 bg-blue-500 hover:bg-blue-600 text-white whitespace-nowrap"
           >
             <Plus size={20} />
             Add Student
@@ -157,7 +157,7 @@ export default function StudentsPage() {
       )}
 
       <Dialog open={showDialog} onOpenChange={setShowDialog}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>
               {selectedStudent ? "Edit Student" : "Add New Student"}
