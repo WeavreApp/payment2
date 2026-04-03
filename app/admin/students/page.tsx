@@ -50,7 +50,7 @@ export default function StudentsPage() {
 
     if (studentsRes.data) {
       const enriched = await Promise.all(
-        studentsRes.data.map(async (student) => {
+        studentsRes.data.map(async (student: Student) => {
           const paymentInfo = await getStudentPaymentInfo(student.id);
           return {
             ...student,

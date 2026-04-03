@@ -77,7 +77,8 @@ export default function PaymentForm({ onSuccess }: PaymentFormProps) {
       if (result.error) {
         alert(`Error: ${result.error}`);
       } else {
-        setSuccessMsg(`Payment recorded successfully! TXN: ${result.data?.transaction_id}`);
+        const txnId = (result as any).data?.transaction_id;
+        setSuccessMsg(`Payment recorded successfully! TXN: ${txnId}`);
         setFormData({
           student_id: "",
           amount: "",
